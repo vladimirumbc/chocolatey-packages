@@ -15,7 +15,7 @@ function global:au_GetLatest {
     $new = (( $release.links -match "\/v\d+\.\d+(\.\d+)?" ) -split " " | select -First 10 | Select -Last 1 )
     $new = $new.Substring(1,$new.Length-2)
     $https = "https://github.com"
-    $releases = "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/tag/v$new/"
+    $releases = "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/expanded_assets/v$new/"
     $download_page = Invoke-WebRequest $releases -UseBasicParsing
     $url_i         = $download_page.Links | ? href -match '.exe$' | Select-Object -Last 2 | % { $https + $_.href }
     $url_p         = $download_page.Links | ? href -match '.7z$' | % { $https + $_.href }
