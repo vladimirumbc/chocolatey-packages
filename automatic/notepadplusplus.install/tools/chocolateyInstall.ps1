@@ -1,5 +1,7 @@
 ﻿$ErrorActionPreference = 'Stop'
 
+$pp = Get-PackageParameters
+
 if (Test-Path "$env:TEMP\npp.running") {
   $programRunning = Get-Content -Path "$env:TEMP\npp.running"
   Remove-Item "$env:TEMP\npp.running"
@@ -26,6 +28,10 @@ $packageArgs = @{
   softwareName   = 'Notepad\+\+*'
   silentArgs     = '/S'
   validExitCodes = @(0)
+}
+
+if ($pp.installLocation) {
+	$packageArgs["SilentArgs"] += ' D="' + $pp.installLocation + '"'
 }
 
 Install-ChocolateyInstallPackage @packageArgs
