@@ -31,7 +31,7 @@ $packageArgs = @{
 }
 
 if ($pp.installLocation) {
-	$packageArgs["SilentArgs"] += ' D="' + $pp.installLocation + '"'
+	$packageArgs["SilentArgs"] += ' /D="' + $pp.installLocation + '"'
 }
 
 Install-ChocolateyInstallPackage @packageArgs
